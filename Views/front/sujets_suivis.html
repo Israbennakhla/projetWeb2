@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sujets suivis</title>
+  <style>
+    /* Couleurs et styles globaux */
+
+    body {
+      background: linear-gradient(#E6E6FA, #FFF0F5);
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    h1 {
+      color: #FF9900;
+      font-size: 24px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      text-align: center;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Styles pour les sujets suivis */
+    
+
+    ul.sujets-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      width: 80%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    ul.sujets-list li {
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+      background-color: #F0FFF0;
+      width: 300px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    ul.sujets-list li:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    ul.sujets-list li h3 {
+      margin-top: 0;
+      color: #FF0000;
+      font-size: 20px;
+      font-family: Comic Sans MS;
+    }
+
+    ul.sujets-list li p {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    ul.sujets-list li a {
+  color: #333333;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+  border: 1px solid #FF9900;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+ul.sujets-list li a:hover {
+  background-color: #FF9900;
+  color: #666666;
+}
+    
+
+    /* Styles pour les tableaux */
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mes sujets suivis</h1>
+  <ul class="sujets-list"></ul>
+
+  <script>
+    // Fonction pour afficher un sujet suivi
+    function afficherSujet(sujet) {
+      // Créez un élément li
+      const elementLi = document.createElement("li");
+
+      // Ajoutez le titre du sujet
+      const elementTitre = document.createElement("h3");
+      elementTitre.textContent = sujet.titre;
+      elementLi.appendChild(elementTitre);
+
+      // Ajoutez la date de la dernière intervention
+      const elementDate = document.createElement("p");
+      elementDate.textContent = sujet.dateDerniereIntervention;
+      elementLi.appendChild(elementDate);
+
+      // Ajoutez un lien vers le sujet
+      const elementLien = document.createElement("a");
+      elementLien.href = sujet.lien;
+      elementLien.textContent = "Voir le sujet";
+      elementLi.appendChild(elementLien);
+
+      // Ajoutez l'élément li à la liste
+      const elementListe = document.querySelector(".sujets-list");
+      elementListe.appendChild(elementLi);
+    }
+
+    // Liste des sujets suivis
+    const sujetsSuivis = [
+      {
+        titre: "Comment créer un chatbot en ligne avec Javascript ?",
+        dateDerniereIntervention: "14 novembre 2023",
+        lien: "https://www.forum.com/sujet/comment-creer-un-chatbot-en-ligne-avec-javascript",
+      },
+      {
+        titre: "Problème d'installation de Python sur Windows 10",
+        dateDerniereIntervention: "12 novembre 2023",
+        lien: "https://www.forum.com/sujet/probleme-dinstallation-de-python-sur-windows-10",
+      },
+      // Ajout de 16 autres sujets
+      {
+        titre: "Apprendre le langage C++ en 2024",
+        dateDerniereIntervention: "21 mars 2024",
+        lien: "https://www.forum.com/sujet/apprendre-le-langage-c++-en-2024",
+      },
+      {
+        titre: "Comprendre les bases de données NoSQL",
+        dateDerniereIntervention: "18 mars 2024",
+        lien: "https://www.forum.com/sujet/comprendre-les-bases-de-donnees-nosql",
+      },
+      // ...
+    ];
+
+    // Affichage de la liste des sujets
+    for (const sujet of sujetsSuivis) {
+      afficherSujet(sujet);
+    }
+  </script>
+</body>
+</html>

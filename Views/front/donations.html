@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plateforme de Donations</title>
+    <!-- Ajouter des liens vers les fichiers CSS pour la mise en page -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Plateforme de Donations</h1>
+    </header>
+
+    <main>
+        <section id="presentation">
+            <h2>Projets Bénéficiaires</h2>
+            <div class="project">
+                <h3>Nom du Projet</h3>
+                <p>Description du projet et des étudiants bénéficiaires.</p>
+                <p>Objectif de collecte de fonds : $XXXX</p>
+                <a href="donate.php?project_id=1" class="donate-button">Faire un Don</a>
+            </div>
+            <!-- Ajouter d'autres projets bénéficiaires avec leurs informations -->
+        </section>
+
+        <section id="donation-form">
+            <h2>Faire un Don</h2>
+            <form action="process_donation.php" method="post">
+                <label for="amount">Montant du Don :</label>
+                <input type="number" id="amount" name="amount" required>
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+                <!-- Ajouter d'autres champs pour l'adresse, le pays, etc., si nécessaire -->
+                <button type="submit">Faire un Don</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright © 2024 Plateforme de Donations. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

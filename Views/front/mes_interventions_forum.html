@@ -1,0 +1,80 @@
+
+
+  <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sujets suivis</title>
+  <style>
+    .intervention-item {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .intervention-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .intervention-title {
+    margin-right: 10px;
+  }
+  
+  .intervention-date {
+    margin-left: auto;
+  }
+  
+  .avatar-eleve, .avatar-professeur {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .intervention-details {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .intervention-details th {
+    background-color: #0099ff;
+    color: #ffffff;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .intervention-details td {
+    padding: 10px;
+  }
+  </style>
+</head>
+<body>
+  <li class="intervention-item">
+    <div class="intervention-header">
+      <h3 class="intervention-title">Sujet : Comment créer un chatbot en ligne avec Javascript ?</h3>
+      <p class="intervention-date">14 novembre 2023</p>
+      <img src="img/avatar-eleve.png" alt="Avatar de l'élève" class="avatar-eleve">
+    </div>
+    <table class="intervention-details">
+      <tr>
+        <th>Question</th>
+        <th>Réponse du professeur</th>
+      </tr>
+      <tr>
+        <td>
+          <p>Bonjour, je suis en train de développer un chatbot en ligne avec Javascript et je rencontre quelques difficultés pour implémenter la fonctionnalité de chat en temps réel. J'ai essayé d'utiliser WebSockets mais je n'arrive pas à les configurer correctement. Quelqu'un peut-il m'aider ?</p>
+        </td>
+        <td>
+          <img src="img/avatar-professeur.png" alt="Avatar du professeur" class="avatar-professeur">
+          <p>Bonjour, il y a plusieurs points à vérifier pour configurer WebSockets correctement. Assurez-vous que votre serveur et votre client utilisent la même version du protocole et que les ports sont bien ouverts. Vous pouvez également consulter la documentation de WebSockets et des tutoriels en ligne pour vous aider.</p>
+        </td>
+      </tr>
+    </table>
+  </li>
+</body>
+</html>
+
+
+  

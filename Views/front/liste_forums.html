@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des sujets suivis</title>
+  <style>
+    /* Code CSS */
+     </* Couleurs et styles globaux */
+
+body {
+  background: linear-gradient(#E6E6FA, #FFF0F5);
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1 {
+  color: #FF9900;
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Styles pour la liste des forums */
+
+ul.liste-forums {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+ul.liste-forums li {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #F0FFF0;
+  width: 300px;
+  text-align: center;
+  transition: 0.3s;
+  position: relative; /* Pour le positionnement de l'icône */
+}
+
+ul.liste-forums li:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+ul.liste-forums li h3 {
+  margin-top: 0;
+  color: #FF0000;
+  font-size: 20px;
+  font-family: Comic Sans MS;
+}
+
+ul.liste-forums li p {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+ul.liste-forums li a {
+  color: #0099FF;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Brush Script MT;
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+  border: 1px solid #FF9900;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+ul.liste-forums li a:hover {
+  background-color: #FF9900;
+  color: #fff;
+}
+</style>
+
+/* Icônes
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Mes sujets suivis</h1>
+  <ul class="liste-sujets">
+    <li>
+      <h3>Apprendre le langage C++ en 2024</h3>
+      <p>Développez vos compétences en programmation avec ce langage puissant.</p>
+      <a href="#">Lien vers le sujet</a>
+    </li>
+    <li>
+      <h3>Comprendre les bases de données NoSQL</h3>
+      <p>Découvrez les alternatives aux bases de données SQL traditionnelles.</p>
+      <a href="#">Lien vers le sujet</a>
+    </li>
+    <li>
+      <h3>Développer une application mobile avec React Native</h3>
+      <p>Créez des applications iOS et Android avec un seul framework.</p>
+      <a href="#">Lien vers le sujet</a>
+    </li>
+    <li>
+      <h3>Créer un site web e-commerce avec WordPress</h3>
+      <p>Lancez votre boutique en ligne facilement et rapidement.</p>
+      <a href="#">Lien vers le sujet</a>
+    </li>
+    <li>
+      <h3>Maîtriser les outils de versioning Git et GitHub</h3>
+      <p>Collaborez efficacement sur vos projets de développement.</p>
+      <a href="#">Lien vers le sujet</a>
+    </li>
+    <li>
+      <h3>Découvrir les frameworks d'intelligence artificielle</h3>
+      <p>Explorez les applications de l'IA et apprenez à les utiliser.</p>
+      <a href="#">Lien vers le sujet</a>
+    </li>
+    <li>
+      <h3>Sécuriser vos applications web</h3>
+      <p>Protégez vos données et vos utilisateurs contre les attaques.</p>
+      <a href="#">Lien vers le sujet</a>
+    </li>
+    <li>
+     
