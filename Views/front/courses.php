@@ -1,10 +1,15 @@
 <?php
 require_once ("../../Controller/CoursC.php"); // Assuming the path to your TypeOffreC class
 require_once ("../../Controller/FormationC.php");
+require 'phpqrcode/qrlib.php';
 $formationc = new FormationC();
 $formations = $formationc->afficherFormation();
 $coursC = new CoursC();
 $courses = $coursC->afficherCours();
+require_once 'phpqrcode/qrlib.php';
+$path = 'images/';
+$qrcode = $path . time() . ".png";
+QRcode::png("", $qrcode, 'H', 4, 4);
 
 ?>
 
@@ -44,6 +49,29 @@ $courses = $coursC->afficherCours();
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <!-- Include qrious library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/qrious.min.js"></script>
+    <script>
+        // Function to show QR code modal
+        function showQRCode(formationId) {
+            // AJAX request to generate and get QR code image URL
+            $.ajax({
+                url: 'generate_qr_code.php', // Update with the actual URL
+                method: 'POST',
+                data: { formation_id: formationId },
+                success: function (response) {
+                    // Update QR code image source and show modal
+                    $('#qrCodeImage').attr('src', response);
+                    $('#qrCodePopup').modal('show');
+                },
+                error: function () {
+                    alert('Failed to generate QR code.');
+                }
+            });
+        }
+    </script>
+
+
 </head>
 
 <body>
@@ -188,7 +216,6 @@ $courses = $coursC->afficherCours();
                                 </div>
                             </div>
                             <div class="text-center p-4 pb-0">
-                                <h3 class="mb-0"><?= $course['prix'] ?> DT</h3>
 
                                 <h3 class="mb-4"><?= $course['nom'] ?></h3>
                                 <h5 class="mb-4"><?= $course['description'] ?></h5>
@@ -219,33 +246,33 @@ $courses = $coursC->afficherCours();
         </div>
         <div class="owl-carousel courses-carousel">
             <?php foreach ($formations as $formation) { ?>
-
+                <?php
+                // Generate a random number between 1 and 14
+                $random_id = mt_rand(1, 14);
+                ?>
                 <div class="courses-item position-relative">
-                    <img class="img-fluid" src="img/courses-<?= $formation['id'] ?>.jpg" alt="">
+                    <img class="img-fluid" src="img/courses-<?= $random_id ?>.jpg" alt="">
                     <div class="courses-text">
                         <h4 class="text-center text-white px-3"><?= $formation['title'] ?></h4>
                         <div class="border-top w-100 mt-3">
                             <div class="d-flex justify-content-between p-4">
                                 <span class="text-white"><i class="fa fa-user mr-2"></i><?= $formation['tuteur'] ?></span>
-                                </span>
                             </div>
                         </div>
                         <div class="w-100 bg-white text-center p-4">
                             <span><i></i>Description: <?= $formation['description'] ?></span><span></span>
                             <span><i></i>Prix: <?= $formation['prix'] ?> TND
                             </span>
+                            <span><button class="btn btn-primary" onclick="showQRCode('<?= $formation['id'] ?>')">QR
+                                    Code</button>
+                            </span>
                         </div>
                     </div>
                 </div>
-
             <?php } ?>
         </div>
 
     </div>
-    <!-- Formation End -->
-
-
-    <!-- Testimonial Start -->
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="text-center">
@@ -298,10 +325,6 @@ $courses = $coursC->afficherCours();
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
-
-
-    <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
@@ -360,14 +383,27 @@ $courses = $coursC->afficherCours();
             </div>
         </div>
     </div>
-    <!-- Footer End -->
+    <!-- Modal -->
+    <div id="qrCodePopup" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">QR Code de la Formation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="qrCodeImage" class="img-fluid" src="" alt="QR Code">
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-    <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>

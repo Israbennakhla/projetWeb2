@@ -6,6 +6,7 @@ class Formation
     private $description;
     private $tuteur;
     private $prix;
+    private $coursList; //List of Cours objects
     // Constructor de la class "Formation" qui prend en paramètre l'ID, le titre et la description de la formation.
 
     public function __construct($id, $title, $description, $tuteur, $prix)
@@ -15,6 +16,7 @@ class Formation
         $this->description = $description;
         $this->tuteur = $tuteur;
         $this->prix = $prix;
+        $this->coursList = array();
     }
 
     /**
@@ -97,6 +99,18 @@ class Formation
     public function setPrix($prix)
     {
         $this->prix = $prix;
+    }
+
+    // Method to add a Cours object to the list
+    public function addCours($cours)
+    {
+        $this->coursList[] = $cours;
+    }
+
+    // Method to get the list of Cours objects
+    public function getCoursList()
+    {
+        return $this->coursList;
     }
 
 

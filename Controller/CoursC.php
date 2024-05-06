@@ -3,13 +3,14 @@
 include "../../config.php";
 require_once '../../Model/Cours.php';
 
+
 class CoursC
 {
 
     function ajouterCours($cours)
     {
-        $sql = "INSERT INTO cours ( nom, description, duree, tuteur, nbrEtudiants) 
-                VALUES (:nom, :description, :duree, :tuteur, :nbrEtudiants)";
+        $sql = "INSERT INTO Cours (nom, description, duree, tuteur, nbrEtudiants, formation_id) 
+                VALUES (:nom, :description, :duree, :tuteur, :nbrEtudiants, :formation_id)";
         $db = config::getConnexion();
         try {
             $query = $db->prepare($sql);
@@ -19,7 +20,8 @@ class CoursC
                 'description' => $cours->getDescription(),
                 'duree' => $cours->getDuree(),
                 'tuteur' => $cours->getTuteur(),
-                'nbrEtudiants' => $cours->getNbrEtudiants()
+                'nbrEtudiants' => $cours->getNbrEtudiants(),
+                'formation_id' => $cours->getFormation()
             ]);
         } catch (Exception $e) {
             echo 'Erreur: ' . $e->getMessage();
@@ -105,6 +107,24 @@ class CoursC
         } catch (Exception $e) {
             echo 'Erreur: ' . $e->getMessage();
             return false; // En cas d'erreur, retourne false
+        }
+    }
+    function getFormationTitle($formation_id)
+    {
+        $sql = "select title from formation where id=:id";
+        $db = config::getConnexion();
+        try {
+            $req = $db->prepare($sql);
+
+            $req->bindValue(':id', $formation_id);
+
+            $req->execute();
+            $data = $req->fetch();
+
+            $req->closeCursor();
+            return $data['title'];
+        } catch (exception $e) {
+            die("Erreur:  " . $e->getMessage());
         }
     }
 }

@@ -7,9 +7,10 @@ class Cours
     private $duree;
     private $tuteur;
     private $nbrEtudiants;
+    private $formation; // Reference to Formation object
 
     // Constructor
-    public function __construct($id, $nom, $description, $duree, $tuteur, $nbrEtudiants)
+    public function __construct($id, $nom, $description, $duree, $tuteur, $nbrEtudiants, $formation)
     {
         $this->id = $id;
         $this->nom = $nom;
@@ -17,6 +18,7 @@ class Cours
         $this->duree = $duree;
         $this->tuteur = $tuteur;
         $this->nbrEtudiants = $nbrEtudiants;
+        $this->formation = $formation;
     }
 
     // Getters
@@ -81,6 +83,16 @@ class Cours
     public function setNbrEtudiants($nbrEtudiants)
     {
         $this->nbrEtudiants = $nbrEtudiants;
+    }
+
+    public function getFormation()
+    {
+        return $this->formation;
+    }
+
+    public function setFormation($formation)
+    {
+        $this->formation = $formation;
     }
 }
 

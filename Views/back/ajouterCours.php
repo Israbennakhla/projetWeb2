@@ -1,5 +1,7 @@
 <?php
 require_once ('../../Controller/CoursC.php'); // Supposant que le chemin vers votre classe CoursC est correct
+require_once ('../../Controller/FormationC.php'); // Supposant que le chemin vers votre classe CoursC est correct
+
 
 $coursC = new CoursC();
 
@@ -8,7 +10,8 @@ if (
     isset($_POST["description"]) &&
     isset($_POST["duree"]) &&
     isset($_POST["tuteur"]) &&
-    isset($_POST["nbrEtudiants"])
+    isset($_POST["nbrEtudiants"]) &&
+    isset($_POST['formation'])
 ) {
 
     $nom = $_POST["nom"];
@@ -16,6 +19,8 @@ if (
     $duree = $_POST["duree"];
     $tuteur = $_POST["tuteur"];
     $nbrEtudiants = $_POST["nbrEtudiants"];
+    $formationId = (int) $_POST['formation'];
+
 
     if ($coursC->nomExisteDeja($nom)) {
         // Nom déjà pris, renvoie une erreur
@@ -23,7 +28,7 @@ if (
         echo "Le nom du cours est déjà pris. Veuillez choisir un autre nom.";
         return false;
     }
-    $cours = new Cours(0, $nom, $description, $duree, $tuteur, $nbrEtudiants);
+    $cours = new Cours(0, $nom, $description, $duree, $tuteur, $nbrEtudiants, $formationId);
 
     $coursC->ajouterCours($cours);
 
@@ -125,6 +130,10 @@ if (
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Cours
                         </a>
+                        <a class="nav-link" href="formations.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Formations
+                        </a>
 
                     </div>
                 </div>
@@ -163,6 +172,21 @@ if (
                             <div class="form-group">
                                 <label for="nbrEtudiants">Nombre d'étudiants</label>
                                 <input type="text" class="form-control" id="nbrEtudiants" name="nbrEtudiants">
+                            </div>
+                            <div class="form-group">
+                                <label for="formation">Formation</label>
+                                <select class="form-control" id="formation" name="formation">
+                                    <?php
+                                    // Fetch formations from the database
+                                    $formationC = new FormationC();
+                                    $formations = $formationC->afficherFormation();
+
+                                    // Loop through the formations and create options for the select input
+                                    foreach ($formations as $formation) {
+                                        echo '<option value="' . $formation['id'] . '">' . $formation['title'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Ajouter</button>

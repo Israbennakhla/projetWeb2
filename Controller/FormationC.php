@@ -7,7 +7,7 @@ class FormationC
 
     function ajouterFormation($formation)
     {
-        $sql = "INSERT INTO formations (title, description, tuteur, prix) VALUES (:title, :description, :tuteur,:prix);";
+        $sql = "INSERT INTO formation (title, description, tuteur, prix) VALUES (:title, :description, :tuteur,:prix);";
 
         $db = configC::getConnexion();
         try {
@@ -26,7 +26,7 @@ class FormationC
 
     function afficherFormation()
     {
-        $sql = "SELECT * FROM formations";
+        $sql = "SELECT * FROM formation";
         $db = configC::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -38,7 +38,7 @@ class FormationC
 
     function supprimerFormation($id)
     {
-        $sql = "DELETE FROM formations WHERE id = :id";
+        $sql = "DELETE FROM formation WHERE id = :id";
         $db = configC::getConnexion();
         $req = $db->prepare($sql);
         $req->bindValue(':id', $id);
@@ -51,7 +51,7 @@ class FormationC
 
     function getFormationById($id)
     {
-        $sql = "SELECT * FROM formations WHERE id = :id";
+        $sql = "SELECT * FROM formation WHERE id = :id";
         $db = configC::getConnexion();
         try {
             $query = $db->prepare($sql);
@@ -68,11 +68,11 @@ class FormationC
         try {
             $db = configC::getConnexion();
             $query = $db->prepare(
-                'UPDATE formations SET 
+                'UPDATE formation SET 
                 title = :title,
                 description = :description,
                 tuteur = :tuteur,
-                prix = :prix
+                prix = :prix,
                 WHERE id = :id'
             );
             $query->execute([

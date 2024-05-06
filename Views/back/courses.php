@@ -1,9 +1,7 @@
 <?php
-require_once ("../../Controller/CoursC.php"); // Assuming the path to your TypeOffreC class
-
+require_once "../../Controller/CoursC.php"; // Assuming the path to your TypeOffreC class
 $coursC = new CoursC();
 $courses = $coursC->afficherCours();
-
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +17,42 @@ $courses = $coursC->afficherCours();
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <script>
+        // Fonction pour filtrer les cours
+        function filterCourses() {
+            // Récupérer la valeur du champ de recherche
+            var input = document.getElementById('searchInput');
+            var filter = input.value.toUpperCase();
+            // Récupérer les lignes de la table
+            var table = document.getElementById('datatablesSimple');
+            var rows = table.getElementsByTagName('tr');
+
+            // Parcourir toutes les lignes de la table, et masquer celles qui ne correspondent pas à la recherche
+            for (var i = 0; i < rows.length; i++) {
+                var td = rows[i].getElementsByTagName('td');
+                var visible = false;
+                for (var j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        var txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            visible = true;
+                            break;
+                        }
+                    }
+                }
+                // Afficher ou masquer la ligne selon si elle correspond à la recherche
+                if (visible) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+
+        // Ajouter un événement d'écouteur d'événement pour déclencher la fonction de filtrage lors de la saisie dans le champ de recherche
+        document.getElementById('searchInput').addEventListener('keyup', filterCourses);
+    </script>
+
 </head>
 
 <body class="sb-nav-fixed">
@@ -112,6 +146,7 @@ $courses = $coursC->afficherCours();
                                         <th>Durée</th>
                                         <th>Tuteur</th>
                                         <th>Nbr d'étudiants</th>
+                                        <th>Foramtion</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -124,6 +159,8 @@ $courses = $coursC->afficherCours();
                                             <td><?= $course['duree'] ?></td>
                                             <td><?= $course['tuteur'] ?></td>
                                             <td><?= $course['nbrEtudiants'] ?></td>
+                                            <td><?= $coursC->getFormationTitle($course['formation_id']) ?>
+                                            </td>
                                             <td>
                                                 <a href="modifierCours.php?id=<?= $course['id'] ?>"
                                                     class="btn btn-primary btn-sm">Modifier</a>
